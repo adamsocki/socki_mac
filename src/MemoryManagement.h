@@ -7,7 +7,6 @@
 
 struct MAllocator;
 
-
 typedef void *AllocateFunc(MAllocator *allocator, uint64 size);
 typedef void DeallocateFunc(MAllocator *allocator, void *data);
 
@@ -15,7 +14,6 @@ struct MAllocator {
     AllocateFunc *allocate;
     DeallocateFunc *deallocate;
 };
-
 
 inline void *AllocateMem(MAllocator *allocator, uint64 size) {
     return allocator->allocate(allocator, size);
@@ -31,7 +29,6 @@ struct MemoryArena : MAllocator {
     uint32 size; // in bytes
     void *ptr;
 };
-
 
 
 void *PushSizeMemoryArena(MemoryArena *arena, uint64 size);

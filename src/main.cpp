@@ -23,13 +23,14 @@
 
 
 
-struct GamePlatform {
+struct GamePlatform{
     bool running;
 
     GameMemory gameMem;
 };
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     GLFWwindow *window;
 
     GamePlatform platform = {};
@@ -63,9 +64,6 @@ int main(int argc, char *argv[]) {
         // Handle error
     }
 
-
-
-
     GameInit();
 
 
@@ -95,6 +93,8 @@ int main(int argc, char *argv[]) {
 
         //  Swap buffers
         glfwSwapBuffers(window);
+
+        ClearInputManager(inputManager);
     }
 
     // Clean up

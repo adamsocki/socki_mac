@@ -58,9 +58,18 @@ void DynamicArrayAllocateChunk(DynamicArray<T> *array) {
         chunk->nextChunk = newChunk;
         array->tailChunk = chunk->nextChunk;
     }
-
-
 }
+
+template <typename T>
+inline uint32 PushBack(DynamicArray<T> *array, T elem)
+{
+    DynamicArrayEnsureCapacity(array, array->count + 1);
+    uint32 index = array->count;
+    array->count++;
+    (*array)[index] = elem;
+    return index;
+}
+
 
 template <typename T>
 void DynamicArrayEnsureCapacity(DynamicArray<T> *array, uint32 capacity) {
