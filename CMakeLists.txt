@@ -11,7 +11,7 @@ find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # Add the source files
-set(SOURCES src/main.cpp src/types.h)
+set(SOURCES src/main.cpp src/types.h src/MemoryManagement.h src/dynamic_memory.h)
 
 # Add the executable target
 add_executable(untitled1 ${SOURCES})

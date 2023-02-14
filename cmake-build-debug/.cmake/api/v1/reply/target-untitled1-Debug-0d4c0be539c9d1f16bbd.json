@@ -128,7 +128,9 @@
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				1
+				1,
+				2,
+				3
 			]
 		}
 	],
@@ -143,6 +145,16 @@
 		{
 			"backtrace" : 1,
 			"path" : "src/types.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/MemoryManagement.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/dynamic_memory.h",
 			"sourceGroupIndex" : 1
 		}
 	],
