@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <mach/mach_time.h>
 
 #include <assert.h>
 #define ASSERT(...) assert(__VA_ARGS__)
@@ -64,6 +65,21 @@ int main(int argc, char *argv[])
         // Handle error
     }
 
+
+
+    mach_timebase_info_t systemFrequency;
+    mach_timebase_info(systemFrequency);
+    uint64_t systemTime = mach_absolute_time();
+
+    gameMem->systemTime = (real32)systemTime;
+    gameMem->time = 0.0;
+
+    //uint64_t systemTime;
+    //uint64_t systemFrequency;
+
+
+
+
     GameInit();
 
 
@@ -78,10 +94,32 @@ int main(int argc, char *argv[])
     Keyboard = gameMem->keyboard;
     Mouse = gameMem->mouse;
 
+    real64 timeSinceRender = 0.0;
+
+
 
     while (!glfwWindowShouldClose(window))
     {   // Render loop
         // Poll for events
+
+        double prevSystemTime = gameMem->time;
+        //double prev_FrameTime = gameMem->time;
+
+        uint64_t end_time = mach_absolute_time();
+        uint64_t elapsed_time = end_time - systemTime;
+        double total_time = elapsed_time * systemFrequency->numer / systemFrequency->denom / 1e9;
+
+        gameMem->deltaTime = total_time - prevSystemTime;
+        gameMem->time = total_time;
+
+        Time = gameMem->time;
+        DeltaTime = gameMem->deltaTime;
+
+        timeSinceRender += gameMem->deltaTime;
+
+       // std::cout<<  gameMem->deltaTime << std::endl;
+        //std::cout<< gameMem->time << std::endl;
+
 
         glfwPollEvents();
 

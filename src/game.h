@@ -28,6 +28,9 @@ struct GameMemory
     InputDevice *mouse;
 };
 
+real32 Time = 0;
+real32 DeltaTime = 0;
+
 
 GameMemory *Game = NULL;
 

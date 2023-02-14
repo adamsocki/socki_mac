@@ -11,7 +11,13 @@ void MyGameInit()
 void MyGameLogicUpdate_Logic()
 {
 
-}
+
+    if (InputPressed(Keyboard, GLFW_KEY_P))
+    {
+        std::cout << "P key pressed." << std::endl;
+    }
+
+}   
 
 
 

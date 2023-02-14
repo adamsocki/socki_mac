@@ -61,10 +61,10 @@ bool InputHeld(InputDevice *device, int32 inputID) {
 void UpdateInput(InputManager *input)
 {
 
-    if (input->keyPressed[48])
+    /*if (input->keyPressed[48])
     {
         std::cout << "Escape key pressed." << std::endl;
-    }
+    }*/
     for (int d = 0; d < input->deviceCount; d++) {
         InputDevice *device = &input->devices[d];
 
@@ -80,6 +80,37 @@ void UpdateInput(InputManager *input)
             }
         }
     }
+
+    for (int i = 0; i < input->events.count; i++) {
+        InputEvent event = input->events[i];
+        int32 index = event.index;
+
+        InputDevice *device = event.device;
+
+        if (!event.discreteValue) {
+            if (device->framesHeld[index] > 0) {
+                device->released[index] = true;
+            }
+
+            device->timePressed[index] = -1;
+            device->framesHeld[index] = -1;
+            device->pressed[index] = false;
+        }
+        else {
+            if (device->framesHeld[index] < 0) {
+                //printf("pressed\n");
+
+                device->timePressed[index] = Game->time;
+                device->framesHeld[index] = 0;
+                device->pressed[index] = true;
+                device->released[index] = false;
+            }
+            else {
+                // @NOTE: we shouldnt even get a pressed event when the key is being held
+            }
+        }
+    }
+
 }
 
 void ClearInputManager(InputManager *input) {
