@@ -151,11 +151,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         event.index = key;
 
         PushBack(&Game->inputManager.events, event);
-        Game->inputManager.keyPressed[key] = true;
+      //p  Game->inputManager.keyPressed[key] = true;
     }
     else if (action == GLFW_RELEASE)
     {
-        Game->inputManager.keyPressed[key] = false;
+        InputEvent event = {};
+
+        event.device = Game->keyboard;
+        event.discreteValue = false;
+        event.index = key;
+
+        PushBack(&Game->inputManager.events, event);
+       // Game->inputManager.keyPressed[key] = false;
     }
 }
 
